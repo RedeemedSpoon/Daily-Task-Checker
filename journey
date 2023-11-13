@@ -11,7 +11,7 @@ done
 sleep 0.5
 clear
 
-check_use=$(tail -n 15 /home/Ethan/Code/Bash/Necessary\ Files/TaskDB.txt | grep '/')
+check_use=$(tail -n 15 ~/Daily-Task-Checker/Necessary\ Files/TaskDB.txt | grep '/')
 current_date=$(date +%d/%m/%y)
 
 if echo "$check_use" | grep -q "$current_date"; then
@@ -25,16 +25,16 @@ else
     today_date=$current_date
 fi
 
-echo "$today_date:" >>/home/Ethan/Code/Bash/Necessary\ Files/TaskDB.txt
+echo "$today_date:" >>~/Daily-Task-Checker/Necessary\ Files/TaskDB.txt
 input_lines=()
-mapfile -t input_lines </home/Ethan/Code/Bash/Necessary\ Files/Criterions.txt
+mapfile -t input_lines <~/Daily-Task-Checker/Necessary\ Files/Criterions.txt
 
 for line in "${input_lines[@]}"; do
     while true; do
         echo -n "$line"
         read -r input
         if [ $input == "+" ] || [ $input == "-" ] || [ $input == "~" ]; then
-            echo $line $input >>/home/Ethan/Code/Bash/Necessary\ Files/TaskDB.txt
+            echo $line $input >>~/Daily-Task-Checker/Necessary\ Files/TaskDB.txt
             sleep 0.25
             break
         else
@@ -46,6 +46,6 @@ done
 sleep 0.5
 echo -e "\nThanks for taking your time to complete this test! Don't forget to come tomorrow!"
 sleep 3
-echo "" >>/home/Ethan/Code/Bash/Necessary\ Files/TaskDB.txt
+echo "" >>~/Daily-Task-Checker/Necessary\ Files/TaskDB.txt
 clear
 exit 0
