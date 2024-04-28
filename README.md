@@ -32,7 +32,7 @@ Follow the on-screen instructions to evaluate your day using the symbols (+/-/~)
 To visualize your progress, you can use commands like:
 
 ```bash
-cat ~/Daily-Task-Checker/Necessary\ Files/TaskDB.txt | sort -u | uniq -c
+cat ~/Daily-Task-Checkers/TaskDB.txt | sort -u | uniq -c
 ```
 
 This command will display a summary of the occurrences of each evaluation symbol in your progress database.
@@ -40,7 +40,7 @@ This command will display a summary of the occurrences of each evaluation symbol
 For example, to check the count of "good sleep" (depend on your own personalized question) evaluations:
 
 ```bash
-grep "good sleep" ~/Daily-Task-Checker/Necessary\ Files/TaskDB.txt | sort -u | uniq -c
+grep "good sleep" ~/Daily-Task-Checkers/TaskDB.txt | sort -u | uniq -c
 ```
 
 Adjust the criteria and paths based on your specific evaluations and file locations.
@@ -62,6 +62,7 @@ The script considers evaluations near the 6 AM mark as part of the previous day 
 The script is designed to work with a regular user's home directory (`~`). Running it as root may lead to unexpected behavior, as it messes with the home directory path.
 
 **Compatibility:**
+
 - The script is designed for Unix-based systems.
 
 ## Progress Database
@@ -95,16 +96,16 @@ crontab -e
 Add the following line to run the script daily:
 
 ```bash
-0 17 * * * bash -i -c '/path/to/journey.sh'
+0 17 * * * bash -i -c '/path/to/journey'
 ```
 
-Replace `/path/to/journey.sh` with the correct path to your script. (just 'journey' if you have put it in the $PATH)
+Replace `/path/to/journey` with the correct path to your script. (just 'journey' if you have put it in the $PATH)
 
 This command uses `/bin/bash -i -c` to run the script in interactive mode, ensuring it displays in the terminal and requires user input.
 
-you can change the hour or the minute where this program will run on each day by modifying the first option in the crontab job. the fist part '0' is the minute timer and the second part '17' is the hour timer. keep the rest '*' to allow it to run daily
+you can change the hour or the minute where this program will run on each day by modifying the first option in the crontab job. the fist part '0' is the minute timer and the second part '17' is the hour timer. keep the rest '\*' to allow it to run daily
 
-Ex : '30 21 * * * bash -i -c 'journey' will run the program everyday at 09:30 PM
+Ex : '30 21 \* \* \* bash -i -c 'journey' will run the program everyday at 09:30 PM
 
 ## Contribution
 

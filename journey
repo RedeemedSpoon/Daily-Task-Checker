@@ -1,51 +1,51 @@
 #!/bin/bash
 
 echo -e "This is the daily Task-Checker. A tool were you will evaluate your day using (+/-/~).\nIt's based on some criterions and will grow each day making a progress DB toward Self-Mastery."
-sleep 2
+sleep 1
 echo -n "the Program will start soon"
 
 for nothing in {1..5}; do
-    echo -n "."
-    sleep 0.5
+	echo -n "."
+	sleep 0.5
 done
 sleep 0.5
 clear
 
-check_use=$(tail -n 15 ~/Daily-Task-Checker/Necessary\ Files/TaskDB.txt | grep '/')
+check_use=$(tail -n 50 ~/Daily-Task-Checkers/TaskDB.txt | grep '/')
 current_date=$(date +%d/%m/%y)
 
 if echo "$check_use" | grep -q "$current_date"; then
-    echo "You have used this Program before this day, please do not falsify the database or attempt to cheat."
-    sleep 2
-    clear
-    exit 1
+	echo "You have used this Program before this day, please do not falsify the database or attempt to cheat."
+	sleep 2
+	clear
+	exit 1
 elif [ $(date +%H) -lt 06 ]; then
-    today_date=$(date -d "yesterday" "+%d/%m/%y")
+	today_date=$(date -d "yesterday" "+%d/%m/%y")
 else
-    today_date=$current_date
+	today_date=$current_date
 fi
 
-echo "$today_date:" >>~/Daily-Task-Checker/Necessary\ Files/TaskDB.txt
+echo "$today_date:" >>~/Daily-Task-Checkers/TaskDB.txt
 input_lines=()
-mapfile -t input_lines <~/Daily-Task-Checker/Necessary\ Files/Criterions.txt
+mapfile -t input_lines <~/Daily-Task-Checkers/Criterions.txt
 
 for line in "${input_lines[@]}"; do
-    while true; do
-        echo -n "$line"
-        read -r input
-        if [ $input == "+" ] || [ $input == "-" ] || [ $input == "~" ]; then
-            echo $line $input >>~/Daily-Task-Checker/Necessary\ Files/TaskDB.txt
-            sleep 0.25
-            break
-        else
-            echo "Error, You didn't provide a correct Argument (+/-/~)"
-        fi
-    done
+	while true; do
+		echo -n "$line"
+		read -r input
+		if [ $input == "+" ] || [ $input == "-" ] || [ $input == "~" ]; then
+			echo $line $input >>~/Daily-Task-Checkers/TaskDB.txt
+			sleep 0.25
+			break
+		else
+			echo "Error, You didn't provide a correct Argument (+/-/~)"
+		fi
+	done
 done
 
 sleep 0.5
 echo -e "\nThanks for taking your time to complete this test! Don't forget to come tomorrow!"
-sleep 3
-echo "" >>~/Daily-Task-Checker/Necessary\ Files/TaskDB.txt
+sleep 1
+echo "" >>~/Daily-Task-Checkers/TaskDB.txt
 clear
 exit 0
